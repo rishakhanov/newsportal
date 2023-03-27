@@ -1,40 +1,47 @@
 package com.labprojects.newsportal.service;
 
-import com.labprojects.newsportal.dao.PersonDAO;
+import com.labprojects.newsportal.dao.PersonDAOImpl;
 import com.labprojects.newsportal.entity.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PersonServiceImpl implements PersonService {
 
     @Autowired
-    private PersonDAO personDAO;
+    private PersonDAOImpl personDAOImpl;
 
     @Override
     @Transactional
     public List<Person> getPersons() {
-        return personDAO.getPersons();
+        return personDAOImpl.getPersons();
     }
 
     @Override
     @Transactional
     public void savePerson(Person person) {
-        personDAO.savePerson(person);
+        personDAOImpl.savePerson(person);
     }
 
     @Override
     @Transactional
     public Person getPerson(Long id) {
-        return personDAO.getPerson(id);
+        return personDAOImpl.getPerson(id);
+    }
+
+    @Override
+    @Transactional
+    public Optional<Person> getPerson(String email) {
+        return personDAOImpl.getPerson(email);
     }
 
     @Override
     @Transactional
     public void deletePerson(Long id) {
-        personDAO.deletePerson(id);
+        personDAOImpl.deletePerson(id);
     }
 }

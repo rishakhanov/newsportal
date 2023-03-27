@@ -2,6 +2,8 @@ package com.labprojects.newsportal.controller;
 
 import com.labprojects.newsportal.entity.Person;
 import com.labprojects.newsportal.service.PersonService;
+import com.labprojects.newsportal.service.PersonServiceImpl;
+import com.labprojects.newsportal.util.PersonValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,14 +17,19 @@ import java.util.List;
 @RequestMapping("/people")
 public class PeopleController {
 
+    private final PersonService personService;
+    private final PersonValidator personValidator;
+
     @Autowired
-    private PersonService personService;
+    public PeopleController(PersonService personService, PersonValidator personValidator) {
+        this.personService = personService;
+        this.personValidator = personValidator;
+    }
 
     @GetMapping()
     public String getPeople(Model model) {
         List<Person> allPersons = personService.getPersons();
         model.addAttribute("allPersons", allPersons);
-        //System.out.println(model.getAttribute("allPersons").toString());
         return "people/all-persons";
     }
 
@@ -34,14 +41,14 @@ public class PeopleController {
 
     @GetMapping("/new")
     public String showAddForm(@ModelAttribute("person") Person person) {
-        //Person person = new Person();
-        //model.addAttribute("person", person);
         return "people/add-person";
     }
 
     @PostMapping()
     public String createPerson(@ModelAttribute("person") @Valid Person person,
                                BindingResult bindingResult) {
+
+        personValidator.validate(person, bindingResult);
 
         if (bindingResult.hasErrors()) {
             return "people/add-person";
@@ -60,6 +67,8 @@ public class PeopleController {
     @PatchMapping("/{id}") //доделать
     public String updatePerson(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult,
                                @PathVariable("id") int id) {
+
+        personValidator.validate(person, bindingResult);
 
         if (bindingResult.hasErrors()) {
             return "people/edit";

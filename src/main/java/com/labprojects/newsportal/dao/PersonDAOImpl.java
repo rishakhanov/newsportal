@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.Query;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class PersonDAOImpl implements PersonDAO {
@@ -36,16 +37,17 @@ public class PersonDAOImpl implements PersonDAO {
     }
 
     @Override
+    public Optional<Person> getPerson(String email) {
+        Query query = sessionFactory.getCurrentSession().createQuery("from Person where email = :email");
+        query.setParameter("email", email);
+        List<Person> list = query.getResultList();
+        return list.size() > 0 ? Optional.ofNullable(list.get(0)) : Optional.empty();
+    }
+
+    @Override
     public void deletePerson(Long id) {
         Session session = sessionFactory.getCurrentSession();
         Person person = getPerson(id);
         session.delete(person);
     }
-
-
-//    @Override
-//    public void updatePerson(Person person) {
-//        Session session = sessionFactory.getCurrentSession();
-//        session.saveOrUpdate(person);
-//    }
 }
