@@ -11,6 +11,8 @@ public interface PersonService {
 
     public void savePerson(Person person);
 
+    public void updatePerson(Long id, Person person);
+
     public Person getPerson(Long id);
 
     public Optional<Person> getPerson(String email);

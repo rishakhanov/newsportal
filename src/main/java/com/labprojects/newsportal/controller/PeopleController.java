@@ -64,9 +64,9 @@ public class PeopleController {
         return "people/edit";
     }
 
-    @PatchMapping("/{id}") //доделать
+    @PatchMapping("/{id}")
     public String updatePerson(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult,
-                               @PathVariable("id") int id) {
+                               @PathVariable("id") Long id) {
 
         personValidator.validate(person, bindingResult);
 
@@ -74,7 +74,8 @@ public class PeopleController {
             return "people/edit";
         }
 
-        personService.savePerson(person);
+        //personService.savePerson(person);
+        personService.updatePerson(id, person);
         return "redirect:/people";
     }
 

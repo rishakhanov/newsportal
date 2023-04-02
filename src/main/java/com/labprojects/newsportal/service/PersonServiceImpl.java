@@ -10,13 +10,13 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional(readOnly = true)
 public class PersonServiceImpl implements PersonService {
 
     @Autowired
     private PersonDAOImpl personDAOImpl;
 
     @Override
-    @Transactional
     public List<Person> getPersons() {
         return personDAOImpl.getPersons();
     }
@@ -29,12 +29,16 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     @Transactional
+    public void updatePerson(Long id, Person person) {
+        personDAOImpl.updatePerson(id, person);
+    }
+
+    @Override
     public Person getPerson(Long id) {
         return personDAOImpl.getPerson(id);
     }
 
     @Override
-    @Transactional
     public Optional<Person> getPerson(String email) {
         return personDAOImpl.getPerson(email);
     }
