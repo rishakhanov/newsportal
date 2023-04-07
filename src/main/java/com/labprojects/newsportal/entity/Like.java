@@ -3,7 +3,7 @@ package com.labprojects.newsportal.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "entity")
+@Table(name = "likes")
 public class Like {
 
     @Id
