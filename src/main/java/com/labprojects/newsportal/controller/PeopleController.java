@@ -1,8 +1,9 @@
 package com.labprojects.newsportal.controller;
 
+import com.labprojects.newsportal.dto.PersonDTO;
 import com.labprojects.newsportal.entity.Person;
 import com.labprojects.newsportal.service.PersonService;
-import com.labprojects.newsportal.service.PersonServiceImpl;
+import com.labprojects.newsportal.util.PersonMapper;
 import com.labprojects.newsportal.util.PersonValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,11 +20,13 @@ public class PeopleController {
 
     private final PersonService personService;
     private final PersonValidator personValidator;
+    private final PersonMapper personMapper;
 
     @Autowired
-    public PeopleController(PersonService personService, PersonValidator personValidator) {
+    public PeopleController(PersonService personService, PersonValidator personValidator, PersonMapper personMapper) {
         this.personService = personService;
         this.personValidator = personValidator;
+        this.personMapper = personMapper;
     }
 
     @GetMapping()
@@ -40,13 +43,15 @@ public class PeopleController {
     }
 
     @GetMapping("/new")
-    public String showAddForm(@ModelAttribute("person") Person person) {
+    public String showAddForm(@ModelAttribute("person") PersonDTO person) {
         return "people/add-person";
     }
 
     @PostMapping()
-    public String createPerson(@ModelAttribute("person") @Valid Person person,
+    public String createPerson(@ModelAttribute("person") @Valid PersonDTO personDTO,
                                BindingResult bindingResult) {
+
+        Person person = personMapper.mapToPersonEntity(personDTO);
 
         personValidator.validate(person, bindingResult);
 
@@ -74,7 +79,6 @@ public class PeopleController {
             return "people/edit";
         }
 
-        //personService.savePerson(person);
         personService.updatePerson(id, person);
         return "redirect:/people";
     }
