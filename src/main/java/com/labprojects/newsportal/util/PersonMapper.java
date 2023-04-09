@@ -17,19 +17,22 @@ public class PersonMapper {
 
     private final RoleService roleService;
 
+    private final Long roleUserId = 4L;
+
     @Autowired
     public PersonMapper(RoleService roleService) {
         this.roleService = roleService;
     }
 
     public Person mapToPersonEntity(PersonDTO personDTO) {
+
         Person person = new Person();
 
         List<News> news = new ArrayList<>();
         List<Comment> comments = new ArrayList<>();
         List<Like> likes = new ArrayList<>();
 
-        person.setRole(roleService.getRole(4L));
+        person.setRole(roleService.getRole(roleUserId));
         person.setNews(news);
         person.setComments(comments);
         person.setLikes(likes);
@@ -39,5 +42,17 @@ public class PersonMapper {
         person.setBaned(false);
 
         return person;
+    }
+
+    public PersonDTO mapToPersonDTO(Person person) {
+
+        PersonDTO personDTO = new PersonDTO();
+
+        personDTO.setId(person.getId());
+        personDTO.setUsername(person.getUsername());
+        personDTO.setPassword(person.getPassword());
+        personDTO.setEmail(person.getEmail());
+
+        return personDTO;
     }
 }

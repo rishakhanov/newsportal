@@ -65,13 +65,22 @@ public class PeopleController {
 
     @GetMapping("/{id}/edit")
     public String editPerson(Model model, @PathVariable("id") Long id) {
-        model.addAttribute("person", personService.getPerson(id));
+
+        Person person = personService.getPerson(id);
+        PersonDTO personDTO = personMapper.mapToPersonDTO(person);
+        model.addAttribute("person", personDTO);
         return "people/edit";
     }
 
     @PatchMapping("/{id}")
-    public String updatePerson(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult,
+    public String updatePerson(@ModelAttribute("person") @Valid PersonDTO personDTO, BindingResult bindingResult,
                                @PathVariable("id") Long id) {
+
+        Person person = personService.getPerson(id);
+
+        person.setUsername(personDTO.getUsername());
+        person.setPassword(personDTO.getPassword());
+        person.setEmail(personDTO.getEmail());
 
         personValidator.validate(person, bindingResult);
 
