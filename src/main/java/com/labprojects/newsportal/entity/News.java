@@ -22,6 +22,9 @@ public class News {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "news")
     private List<Like> likes;
 
+    @Column(name = "title")
+    private String title;
+
     @Column(name = "content")
     private String content;
 
@@ -62,6 +65,14 @@ public class News {
 
     public void setLikes(List<Like> likes) {
         this.likes = likes;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getContent() {
