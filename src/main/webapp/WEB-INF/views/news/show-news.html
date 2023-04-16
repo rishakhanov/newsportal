@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<link href="/resources/style.css" rel="stylesheet" type="text/css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<head>
+    <meta charset="UTF-8">
+    <title>News</title>
+</head>
+<body>
+<div id="header">
+    <h2>News</h2>
+    <div class="topnav">
+        <a href="#home">Login</a>
+        <a href="#about">Register</a>
+        <a href="#contact">Russian</a>
+        <a href="#contact">English</a>
+        <div class="search-container">
+            <form action="">
+                <input type="text" placeholder="Search.." name="search">
+                <button type="submit"><i class="fa fa-search"></i></button>
+            </form>
+        </div>
+    </div>
+</div>
+<div id="menu">
+    <div id="menu-box">
+        <div id="menu-box-news">
+            News
+        </div>
+        <div id="menu-box-news-items">
+            <ul id="news-ul">
+                <li class="news-li"><a href="/news">News</a></li>
+                <li class="news-li"><a th:href="@{/news/comments/{id}(id=${news.getId()})}">Comments</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div id="content">
+    <a href="/news">News</a> >> <a th:href="@{/news/{id}(id=${news.getId()})}" th:text="${news.getTitle()}">news</a>
+    <br/>
+    <br/>
+    <p th:text="${news. getTitle()}">VALUE</p>
+    <p th:text="${news.getContent()}">VALUE</p>
+</div>
+
+</body>
+</html>

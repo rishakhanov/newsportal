@@ -1,0 +1,132 @@
+body{
+    margin: 0px;
+    background:#f2f4f5;
+}
+
+h2{
+    margin: 0px;
+    margin-left: 20px;
+}
+
+#header{
+    background: #e9e9e9;
+    width:100%;
+    height:75px;
+}
+#menu{
+    width:30%;
+    height:300px;
+    float: left;
+}
+#menu-box {
+    background-color: #e9e9e9;
+    width: 80%;
+    height:200px;
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+#menu-box-news {
+    background-color: grey;
+    color: #cccccc;
+    width: 90%;
+    height:30px;
+    margin-top: 10px;
+    text-align: center;
+    vertical-align: middle;
+    padding-top: 10px;
+    float: right;
+}
+
+#menu-box-news-items {
+    background-color: white;
+    color: blue;
+    width: 75%;
+    height:120px;
+    position: relative;
+    left: 55px;
+    top: 60px;
+}
+
+
+.news-li {
+    display: flex;
+    alignment: top;
+    padding-top: 10px;
+}
+
+ul{
+    list-style-type:none;
+}
+li::before {
+    content: ".";
+    background: deepskyblue;
+    padding: 0px 8px;
+    margin:0px 10px 0px 0px;
+    border-radius: 50%;
+    color: deepskyblue;
+}
+
+#content{
+    width: 70%;
+    height:400px;
+    float: left;
+}
+
+.topnav {
+    overflow: hidden;
+    background-color: #e9e9e9;
+}
+
+.topnav a {
+    float: right;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 25px;
+    padding-bottom: 0px;
+    font-size: 15px;
+    color: blue;
+}
+
+
+.topnav .search-container {
+    float: left;
+    margin-left: 20px;
+}
+
+.topnav input[type=text] {
+    padding: 6px;
+    margin-top: 8px;
+    font-size: 17px;
+    border: none;
+}
+
+.topnav .search-container button {
+    float: right;
+    padding: 6px 10px;
+    margin-top: 8px;
+    margin-right: 16px;
+    background: #ddd;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+}
+
+.topnav .search-container button:hover {
+    background: #ccc;
+}
+
+.a-view {
+    color: blue;
+}
+
+.td-view {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.td-title {
+    font-size: 18px;
+
+}
+
