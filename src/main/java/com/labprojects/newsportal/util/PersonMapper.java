@@ -17,7 +17,7 @@ public class PersonMapper {
 
     private final RoleService roleService;
 
-    private final Long roleUserId = 4L;
+    private final static Long ROLE_USER_ID = 4L;
 
     @Autowired
     public PersonMapper(RoleService roleService) {
@@ -32,7 +32,7 @@ public class PersonMapper {
         List<Comment> comments = new ArrayList<>();
         List<Like> likes = new ArrayList<>();
 
-        person.setRole(roleService.getRole(roleUserId));
+        person.setRole(roleService.getRole(ROLE_USER_ID));
         person.setNews(news);
         person.setComments(comments);
         person.setLikes(likes);

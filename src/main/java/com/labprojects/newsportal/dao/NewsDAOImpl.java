@@ -36,7 +36,7 @@ public class NewsDAOImpl implements NewsDAO {
         News news = getNews(id);
         List<Comment> comments = news.getComments();
         //comments.size();
-        //System.out.println(comments);
+        System.out.println(comments);
         return comments;
     }
 
