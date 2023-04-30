@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
-@RequestMapping("/news")
 public class NewsController {
 
     private final NewsService newsService;
@@ -30,7 +29,7 @@ public class NewsController {
         return "news/news";
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/news/{id}")
     public String getNews(@PathVariable("id") Long id, Model model) {
         model.addAttribute("news", newsService.getNews(id));
         return "news/show-news";
@@ -40,6 +39,7 @@ public class NewsController {
     private String getComments(@PathVariable("id") Long id, Model model) {
         List<Comment> comments = newsService.getComments(id);
         model.addAttribute("comments", comments);
+        model.addAttribute("newsId", id);
         return "comments/comments";
     }
 }

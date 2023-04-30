@@ -4,5 +4,5 @@ import com.labprojects.newsportal.entity.Role;
 
 public interface RoleDAO {
 
-    public Role getRole(Long id);
+//    public Role getRole(Long id);
 }

@@ -53,9 +53,18 @@ public class PersonDAOImpl implements PersonDAO {
     }
 
     @Override
+    public Optional<Person> getPersonByName(String username) {
+        Query query = sessionFactory.getCurrentSession().createQuery("from Person where username = :username");
+        query.setParameter("username", username);
+        List<Person> list = query.getResultList();
+        return list.size() > 0 ? Optional.ofNullable(list.get(0)) : Optional.empty();
+    }
+
+    @Override
     public void deletePerson(Long id) {
         Session session = sessionFactory.getCurrentSession();
         Person person = getPerson(id);
         session.delete(person);
+        System.out.println("deleted person");
     }
 }

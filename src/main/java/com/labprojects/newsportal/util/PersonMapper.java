@@ -32,14 +32,14 @@ public class PersonMapper {
         List<Comment> comments = new ArrayList<>();
         List<Like> likes = new ArrayList<>();
 
-        person.setRole(roleService.getRole(ROLE_USER_ID));
+        person.setRole("ROLE_USER");
         person.setNews(news);
         person.setComments(comments);
         person.setLikes(likes);
         person.setUsername(personDTO.getUsername());
         person.setPassword(personDTO.getPassword());
         person.setEmail(personDTO.getEmail());
-        person.setBaned(false);
+        person.setEnabled(true);
 
         return person;
     }

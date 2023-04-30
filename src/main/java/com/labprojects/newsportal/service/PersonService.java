@@ -17,5 +17,7 @@ public interface PersonService {
 
     public Optional<Person> getPerson(String email);
 
+    public Optional<Person> getPersonByName(String username);
+
     void deletePerson(Long id);
 }

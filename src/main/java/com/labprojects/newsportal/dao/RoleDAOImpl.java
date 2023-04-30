@@ -12,9 +12,9 @@ public class RoleDAOImpl implements RoleDAO{
     @Autowired
     private SessionFactory sessionFactory;
 
-    @Override
-    public Role getRole(Long id) {
-        Session session = sessionFactory.getCurrentSession();
-        return session.get(Role.class, id);
-    }
+//    @Override
+//    public Role getRole(Long id) {
+//        Session session = sessionFactory.getCurrentSession();
+//        return session.get(Role.class, id);
+//    }
 }

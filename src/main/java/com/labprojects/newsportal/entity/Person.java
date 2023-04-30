@@ -14,9 +14,6 @@ public class Person {
     @Column(name = "id")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Role role;
-
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "person")
     private List<News> news;
 
@@ -25,6 +22,9 @@ public class Person {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "person")
     private List<Like> likes;
+
+    @Column(name = "role")
+    private String role;
 
     @NotEmpty(message = "Name should not be empty")
     @Size(min = 2, max = 30, message = "Name should be between 2 and 30 characters")
@@ -41,8 +41,8 @@ public class Person {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "is_baned")
-    private boolean isBaned;
+    @Column(name = "enabled")
+    private boolean enabled;
 
     public Person() {
 
@@ -54,14 +54,6 @@ public class Person {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
     }
 
     public List<News> getNews() {
@@ -88,6 +80,14 @@ public class Person {
         this.likes = likes;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     public String getUsername() {
         return username;
     }
@@ -112,11 +112,11 @@ public class Person {
         this.email = email;
     }
 
-    public boolean isBaned() {
-        return isBaned;
+    public boolean isEnabled() {
+        return enabled;
     }
 
-    public void setBaned(boolean baned) {
-        isBaned = baned;
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 }

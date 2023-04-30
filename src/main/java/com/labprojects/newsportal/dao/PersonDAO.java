@@ -17,6 +17,8 @@ public interface PersonDAO {
 
     public Optional<Person> getPerson(String email);
 
+    public Optional<Person> getPersonByName(String username);
+
     public void deletePerson(Long id);
 
 

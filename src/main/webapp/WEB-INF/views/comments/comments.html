@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
 <link href="/resources/style.css" rel="stylesheet" type="text/css"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <head>
@@ -10,7 +10,7 @@
 <div id="header">
     <h2>News</h2>
     <div class="topnav">
-        <a href="#home">Login</a>
+        <a href="/login">Login</a>
         <a href="#about">Register</a>
         <a href="#contact">Russian</a>
         <a href="#contact">English</a>
@@ -29,25 +29,21 @@
         </div>
         <div id="menu-box-news-items">
             <ul id="news-ul">
-                <li class="news-li"><a href="/news">News</a></li>
-                <li class="news-li"><a href="/comments">Comments</a></li>
+                <li><a href="/">News</a></li>
+                <li><a th:href="@{/comments/{id}(id=${newsId})}">Comments</a></li>
             </ul>
         </div>
     </div>
 </div>
 <div id="content">
-    News >> Comments
+    <a href="/">News</a>  >> <a th:href="@{/comments/{id}(id=${newsId})}">Comments</a>
     <br/>
     <br/>
     <table>
         <th:block th:each = "item : ${comments}">
             <tr>
-                <td class="td-title" th:text="${item.id}" style="width: 90%"></td>
+                <td class="td-title" th:text="${item.body}" style="width: 90%"></td>
                 <td th:text="${item.createdDate}" style="width: 10%"></td>
-            </tr>
-            <tr>
-                <td th:text="${item.body}"></td>
-                <td><br/></td>
             </tr>
             <tr>
                 <td><br/></td>

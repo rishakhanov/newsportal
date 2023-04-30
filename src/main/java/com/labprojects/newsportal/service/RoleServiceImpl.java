@@ -13,8 +13,8 @@ public class RoleServiceImpl implements RoleService {
     @Autowired
     RoleDAOImpl roleDAO;
 
-    @Override
-    public Role getRole(Long id) {
-        return roleDAO.getRole(id);
-    }
+//    @Override
+//    public Role getRole(Long id) {
+//        return roleDAO.getRole(id);
+//    }
 }

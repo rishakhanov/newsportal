@@ -44,6 +44,11 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
+    public Optional<Person> getPersonByName(String username) {
+        return personDAOImpl.getPersonByName(username);
+    }
+
+    @Override
     @Transactional
     public void deletePerson(Long id) {
         personDAOImpl.deletePerson(id);

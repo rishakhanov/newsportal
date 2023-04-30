@@ -46,25 +46,13 @@ h2{
     position: relative;
     left: 55px;
     top: 60px;
-}
-
-
-.news-li {
-    display: flex;
-    alignment: top;
-    padding-top: 10px;
+    vertical-align: center;
 }
 
 ul{
-    list-style-type:none;
-}
-li::before {
-    content: ".";
-    background: deepskyblue;
-    padding: 0px 8px;
-    margin:0px 10px 0px 0px;
-    border-radius: 50%;
-    color: deepskyblue;
+    position: relative;
+    bottom: 20px;
+
 }
 
 #content{
