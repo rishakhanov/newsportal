@@ -118,3 +118,12 @@ ul{
 
 }
 
+#edit-input-form {
+text-align: justify;
+    width: 90%;
+    height: 200px;
+}
+
+#edit-textarea {
+
+}

@@ -65,4 +65,13 @@ public class Comment {
     public void setCreatedDate(LocalDate createdDate) {
         this.createdDate = createdDate;
     }
+
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "id=" + id +
+                ", body='" + body + '\'' +
+                ", createdDate=" + createdDate +
+                '}';
+    }
 }

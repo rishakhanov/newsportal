@@ -12,4 +12,10 @@ public interface NewsDAO {
     public News getNews(Long id);
 
     public List<Comment> getComments(Long id);
+
+    public void updateNews(Long id, News news);
+
+    public void deleteNews(Long id);
+
+    public void saveNews(News news);
 }

@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <head>
     <meta charset="UTF-8">
-    <title>News</title>
+    <title>User Management</title>
 </head>
 <body>
 <div id="header">
@@ -31,17 +31,44 @@
         <div id="menu-box-news-items">
             <ul id="news-ul">
                 <li><a href="/">News</a></li>
-                <li><a th:href="@{/comments/{id}(id=${news.getId()})}">Comments</a></li>
+                <li><a href="/people">Users List</a></li>
             </ul>
         </div>
     </div>
 </div>
 <div id="content">
-    <a href="/">News</a> >> <a th:href="@{/news/{id}(id=${news.getId()})}" th:text="${news.getTitle()}">news</a>
+    <a href="/">News</a> >> <a href="/people">Users List</a>
     <br/>
     <br/>
-    <p th:text="${news. getTitle()}">VALUE</p>
-    <p th:text="${news.getContent()}">VALUE</p>
+    <table>
+        <!--<form th:action="@{/people/status}" th:method="post" th:object="${allPersons}">-->
+        <tr>
+            <th>name</th>
+            <th>email</th>
+            <th>permitted</th>
+            <th>delete</th>
+            <th>ban</th>
+        </tr>
+        <tr th:each="person : ${allPersons}">
+            <td>
+                <a th:href="@{/people/{id}(id=${person.getId()})}" th:text="${person.getUsername()}">user</a>
+            </td>
+            <td th:text="${person.email}">emails</td>
+            <td th:text="${person.isEnabled()}">status</td>
+            <td>
+                <form th:method="POST" th:action="@{/people/{id}(id=${person.getId()})}">
+                    <input type="submit" value="Delete"/>
+                </form>
+            </td>
+            <td>
+                <form th:method="POST" th:action="@{/people/ban/{id}(id=${person.getId()})}">
+                    <input type="submit" value="Ban/Permit"/>
+                </form>
+            </td>
+        </tr>
+            <!--<input type="submit" value="Submit">-->
+        <!--</form>-->
+    </table>
 </div>
 </body>
 </html>

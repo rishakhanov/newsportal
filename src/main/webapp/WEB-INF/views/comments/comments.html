@@ -10,8 +10,9 @@
 <div id="header">
     <h2>News</h2>
     <div class="topnav">
-        <a href="/login">Login</a>
-        <a href="#about">Register</a>
+        <a sec:authorize="isAnonymous()" href="/login">Login</a>
+        <a sec:authorize="isAuthenticated()" href="/logout">Logout</a>
+        <a sec:authorize="isAnonymous()" href="#about">Register</a>
         <a href="#contact">Russian</a>
         <a href="#contact">English</a>
         <div class="search-container">

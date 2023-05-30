@@ -5,7 +5,6 @@ import com.labprojects.newsportal.entity.Comment;
 import com.labprojects.newsportal.entity.Like;
 import com.labprojects.newsportal.entity.News;
 import com.labprojects.newsportal.entity.Person;
-import com.labprojects.newsportal.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,15 +13,7 @@ import java.util.List;
 
 @Component
 public class PersonMapper {
-
-    private final RoleService roleService;
-
     private final static Long ROLE_USER_ID = 4L;
-
-    @Autowired
-    public PersonMapper(RoleService roleService) {
-        this.roleService = roleService;
-    }
 
     public Person mapToPersonEntity(PersonDTO personDTO) {
 

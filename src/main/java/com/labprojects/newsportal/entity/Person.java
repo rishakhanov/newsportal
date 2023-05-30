@@ -14,13 +14,13 @@ public class Person {
     @Column(name = "id")
     private Long id;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "person")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "person", cascade = CascadeType.ALL)
     private List<News> news;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "person")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "person", cascade = CascadeType.ALL)
     private List<Comment> comments;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "person")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "person", cascade = CascadeType.ALL)
     private List<Like> likes;
 
     @Column(name = "role")
@@ -32,7 +32,7 @@ public class Person {
     private String username;
 
     @NotEmpty(message = "Password should not be empty.")
-    @Size(min = 5, max = 50, message = "Password should be between 5 and 50 characters long.")
+    @Size(min = 5, max = 200, message = "Password should be between 5 and 200 characters long.")
     @Column(name = "password")
     private String password;
 
@@ -118,5 +118,20 @@ public class Person {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "id=" + id +
+                ", news=" + news +
+                ", comments=" + comments +
+                ", likes=" + likes +
+                ", role='" + role + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", enabled=" + enabled +
+                '}';
     }
 }

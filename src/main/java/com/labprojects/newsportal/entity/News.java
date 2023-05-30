@@ -16,10 +16,10 @@ public class News {
     @ManyToOne(fetch = FetchType.LAZY)
     private Person person;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "news")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "news", cascade = CascadeType.ALL)
     private List<Comment> comments;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "news")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "news", cascade = CascadeType.ALL)
     private List<Like> likes;
 
     @Column(name = "title")
@@ -89,5 +89,15 @@ public class News {
 
     public void setCreatedDate(LocalDate createdDate) {
         this.createdDate = createdDate;
+    }
+
+    @Override
+    public String toString() {
+        return "News{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", createdDate=" + createdDate +
+                '}';
     }
 }

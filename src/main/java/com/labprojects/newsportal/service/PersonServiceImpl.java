@@ -53,4 +53,10 @@ public class PersonServiceImpl implements PersonService {
     public void deletePerson(Long id) {
         personDAOImpl.deletePerson(id);
     }
+
+    @Override
+    @Transactional
+    public void changePersonStatus(Long id) {
+        personDAOImpl.changePersonStatus(id);
+    }
 }

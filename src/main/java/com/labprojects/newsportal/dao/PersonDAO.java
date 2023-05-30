@@ -21,5 +21,5 @@ public interface PersonDAO {
 
     public void deletePerson(Long id);
 
-
+    public void changePersonStatus(Long id);
 }

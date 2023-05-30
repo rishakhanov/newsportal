@@ -20,4 +20,6 @@ public interface PersonService {
     public Optional<Person> getPersonByName(String username);
 
     void deletePerson(Long id);
+
+    void changePersonStatus(Long id);
 }

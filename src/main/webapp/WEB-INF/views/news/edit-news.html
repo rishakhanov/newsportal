@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+<link href="/resources/style.css" rel="stylesheet" type="text/css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit News</title>
+</head>
+<body>
+<div id="header">
+  <h2>News</h2>
+  <div class="topnav">
+    <a sec:authorize="isAnonymous()" href="/login">Login</a>
+    <a sec:authorize="isAuthenticated()" href="/logout">Logout</a>
+    <a sec:authorize="isAnonymous()" href="#about">Register</a>
+    <a href="#contact">Russian</a>
+    <a href="#contact">English</a>
+    <div class="search-container">
+      <form action="">
+        <input type="text" placeholder="Search.." name="search">
+        <button type="submit"><i class="fa fa-search"></i></button>
+      </form>
+    </div>
+  </div>
+</div>
+<div id="menu">
+  <div id="menu-box">
+    <div id="menu-box-news">
+      News
+    </div>
+    <div id="menu-box-news-items">
+      <ul id="news-ul">
+        <li><a href="/">News</a></li>
+        <li><a th:href="@{/comments/{id}(id=${news.getId()})}">Comments</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div id="content">
+  <a href="/">News</a> >> <a th:href="@{/news/{id}(id=${news.getId()})}" th:text="${news.getTitle()}">news</a>
+  <br/>
+  <br/>
+  <form th:action="@{/news/edit/{id}(id=${news.getId()})}" th:object="${news}" method="POST">
+    <input type="text" th:field="*{title}"/>
+    <br/>
+    <textarea id="edit-textarea" th:field="*{content}" name="content" rows="10" cols="100"></textarea>
+    <br/>
+    <input type="submit" value="Update"/>
+  </form>
+</div>
+</body>
+</html>

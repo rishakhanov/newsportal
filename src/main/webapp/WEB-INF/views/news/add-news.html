@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <head>
     <meta charset="UTF-8">
-    <title>News</title>
+    <title>Add news</title>
 </head>
 <body>
 <div id="header">
@@ -29,19 +29,26 @@
             News
         </div>
         <div id="menu-box-news-items">
-            <ul id="news-ul">
+            <ul>
                 <li><a href="/">News</a></li>
-                <li><a th:href="@{/comments/{id}(id=${news.getId()})}">Comments</a></li>
+                <li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_AUTHOR')"><a href="/news/new">Publish News</a></li>
             </ul>
         </div>
     </div>
 </div>
 <div id="content">
-    <a href="/">News</a> >> <a th:href="@{/news/{id}(id=${news.getId()})}" th:text="${news.getTitle()}">news</a>
+    <a href="/">News</a> >> <a href="/news/new">Publish News</a>
     <br/>
     <br/>
-    <p th:text="${news. getTitle()}">VALUE</p>
-    <p th:text="${news.getContent()}">VALUE</p>
+    <form th:action="@{/news}" th:object="${news}" method="POST">
+        <label for="text-title">News title:</label>
+        <input type="text" th:field="*{title}" id="text-title"/>
+        <br/>
+        <label for="edit-textarea">News text:</label>
+        <textarea id="edit-textarea" th:field="*{content}" name="content" rows="10" cols="100"></textarea>
+        <br/>
+        <input type="submit" value="Publish"/>
+    </form>
 </div>
 </body>
 </html>

@@ -65,6 +65,16 @@ public class PersonDAOImpl implements PersonDAO {
         Session session = sessionFactory.getCurrentSession();
         Person person = getPerson(id);
         session.delete(person);
-        System.out.println("deleted person");
     }
+
+    @Override
+    public void changePersonStatus(Long id) {
+        Session session = sessionFactory.getCurrentSession();
+        Person personToBeBannedOrPermitted = session.get(Person.class, id);
+        Boolean status = personToBeBannedOrPermitted.isEnabled();
+        personToBeBannedOrPermitted.setEnabled(!status);
+        System.out.println(personToBeBannedOrPermitted);
+    }
+
+
 }
