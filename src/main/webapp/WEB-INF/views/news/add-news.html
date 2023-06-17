@@ -8,16 +8,16 @@
 </head>
 <body>
 <div id="header">
-    <h2>News</h2>
+    <h2 th:text="#{news}">News</h2>
     <div class="topnav">
-        <a sec:authorize="isAnonymous()" href="/login">Login</a>
-        <a sec:authorize="isAuthenticated()" href="/logout">Logout</a>
-        <a sec:authorize="isAnonymous()" href="#about">Register</a>
-        <a href="#contact">Russian</a>
-        <a href="#contact">English</a>
+        <a sec:authorize="isAnonymous()" href="/login" th:text="#{login}">Login</a>
+        <a sec:authorize="isAuthenticated()" href="/logout" th:text="#{logout}">Logout</a>
+        <a sec:authorize="isAnonymous()" href="/people/new" th:text="#{register}">Register</a>
+        <a href="/news/new?lang=ru" th:text="#{rus}">Russian</a>
+        <a href="/news/new?lang=en" th:text="#{eng}">English</a>
         <div class="search-container">
             <form action="">
-                <input type="text" placeholder="Search.." name="search">
+                <input type="text" name="search" th:placeholder="#{search}">
                 <button type="submit"><i class="fa fa-search"></i></button>
             </form>
         </div>
@@ -26,28 +26,31 @@
 <div id="menu">
     <div id="menu-box">
         <div id="menu-box-news">
-            News
+            <h4 th:text="#{news}">News</h4>
         </div>
         <div id="menu-box-news-items">
             <ul>
-                <li><a href="/">News</a></li>
-                <li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_AUTHOR')"><a href="/news/new">Publish News</a></li>
+                <li><a href="/" th:text="#{news}">News</a></li>
+                <li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_AUTHOR')"><a href="/news/new" th:text="#{news.publish}">Publish News</a></li>
             </ul>
         </div>
     </div>
 </div>
 <div id="content">
-    <a href="/">News</a> >> <a href="/news/new">Publish News</a>
+    <a href="/" th:text="#{news}">News</a> >> <a href="/news/new" th:text="#{news.publish}">Publish News</a>
     <br/>
     <br/>
     <form th:action="@{/news}" th:object="${news}" method="POST">
-        <label for="text-title">News title:</label>
+        <label for="text-title" th:text="#{news.title}">News title:</label>
+        <br/>
         <input type="text" th:field="*{title}" id="text-title"/>
         <br/>
-        <label for="edit-textarea">News text:</label>
+        <br/>
+        <label for="edit-textarea" th:text="#{news.text}">News text:</label>
+        <br/>
         <textarea id="edit-textarea" th:field="*{content}" name="content" rows="10" cols="100"></textarea>
         <br/>
-        <input type="submit" value="Publish"/>
+        <input type="submit" th:value="#{publish}"/>
     </form>
 </div>
 </body>

@@ -95,6 +95,7 @@ public class News {
     public String toString() {
         return "News{" +
                 "id=" + id +
+                ", comment_id='" + title + '\'' +
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
                 ", createdDate=" + createdDate +

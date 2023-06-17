@@ -18,4 +18,10 @@ public interface NewsDAO {
     public void deleteNews(Long id);
 
     public void saveNews(News news);
+
+    public void deleteComment(Long id);
+
+    public void saveComment(Comment comment);
+
+    public News getNews(String searchItem);
 }

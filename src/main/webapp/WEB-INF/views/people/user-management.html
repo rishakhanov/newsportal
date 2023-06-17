@@ -8,16 +8,16 @@
 </head>
 <body>
 <div id="header">
-    <h2>News</h2>
+    <h2 th:text="#{users.list}">Users list</h2>
     <div class="topnav">
-        <a sec:authorize="isAnonymous()" href="/login">Login</a>
-        <a sec:authorize="isAuthenticated()" href="/logout">Logout</a>
-        <a sec:authorize="isAnonymous()" href="#about">Register</a>
-        <a href="#contact">Russian</a>
-        <a href="#contact">English</a>
+        <a sec:authorize="isAnonymous()" href="/login" th:text="#{login}">Login</a>
+        <a sec:authorize="isAuthenticated()" href="/logout" th:text="#{logout}">Logout</a>
+        <a sec:authorize="isAnonymous()" href="/people/new" th:text="#{register}">Register</a>
+        <a href="/people?lang=ru" th:text="#{rus}">Russian</a>
+        <a href="/people?lang=en" th:text="#{eng}">English</a>
         <div class="search-container">
             <form action="">
-                <input type="text" placeholder="Search.." name="search">
+                <input type="text" name="search" th:placeholder="#{search}">
                 <button type="submit"><i class="fa fa-search"></i></button>
             </form>
         </div>
@@ -26,28 +26,28 @@
 <div id="menu">
     <div id="menu-box">
         <div id="menu-box-news">
-            News
+            <h4 th:text="#{news}">News</h4>
         </div>
         <div id="menu-box-news-items">
             <ul id="news-ul">
-                <li><a href="/">News</a></li>
-                <li><a href="/people">Users List</a></li>
+                <li><a href="/" th:text="#{news}">News</a></li>
+                <li><a href="/people" th:text="#{users.list}">Users List</a></li>
             </ul>
         </div>
     </div>
 </div>
 <div id="content">
-    <a href="/">News</a> >> <a href="/people">Users List</a>
+    <a href="/" th:text="#{news}">News</a> >> <a href="/people" th:text="#{users.list}">Users List</a>
     <br/>
     <br/>
     <table>
         <!--<form th:action="@{/people/status}" th:method="post" th:object="${allPersons}">-->
         <tr>
-            <th>name</th>
+            <th th:text="#{name}">name</th>
             <th>email</th>
-            <th>permitted</th>
-            <th>delete</th>
-            <th>ban</th>
+            <th th:text="#{permitted}">permitted</th>
+            <th th:text="#{delete}">delete</th>
+            <th th:text="#{change.status}">change status</th>
         </tr>
         <tr th:each="person : ${allPersons}">
             <td>
@@ -57,12 +57,12 @@
             <td th:text="${person.isEnabled()}">status</td>
             <td>
                 <form th:method="POST" th:action="@{/people/{id}(id=${person.getId()})}">
-                    <input type="submit" value="Delete"/>
+                    <input type="submit" th:value="#{delete.button}"/>
                 </form>
             </td>
             <td>
                 <form th:method="POST" th:action="@{/people/ban/{id}(id=${person.getId()})}">
-                    <input type="submit" value="Ban/Permit"/>
+                    <input type="submit" th:value="#{ban.permit}"/>
                 </form>
             </td>
         </tr>

@@ -5,10 +5,7 @@
     <title>All persons</title>
 </head>
 <body>
-<p>
-  Hello there
-</p>
-
+<p th:text="#{users.list}">Users list</p>
 <table>
     <tr>
         <th>name</th>
@@ -19,7 +16,6 @@
         <td th:text="${person.email}">emails</td>
     </tr>
 </table>
-
 <div th:each="person : ${allPersons}">
     <a th:href="@{/people/{id}(id=${person.getId()})}" th:text="${person.getUsername()}">user</a>
 </div>

@@ -1,17 +1,48 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+<link href="/resources/style.css" rel="stylesheet" type="text/css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <head>
     <meta charset="UTF-8">
-    <title>Person</title>
+    <title>User</title>
 </head>
 <body>
+<div id="header">
+    <h2 th:text="#{user}">User</h2>
+    <div class="topnav">
+        <a sec:authorize="isAnonymous()" href="/login" th:text="#{login}">Login</a>
+        <a sec:authorize="isAuthenticated()" href="/logout" th:text="#{logout}">Logout</a>
+        <a sec:authorize="isAnonymous()" href="/people/new" th:text="#{register}">Register</a>
+        <a th:href="@{/people/{id}(id=${person.getId()}, lang=ru)}" th:text="#{rus}">Russian</a>
+        <a th:href="@{/people/{id}(id=${person.getId()}, lang=en)}" th:text="#{eng}">English</a>
+        <div class="search-container">
+            <form action="">
+                <input type="text" name="search" th:placeholder="#{search}">
+                <button type="submit"><i class="fa fa-search"></i></button>
+            </form>
+        </div>
+    </div>
+</div>
+<div id="menu">
+    <div id="menu-box">
+        <div id="menu-box-news">
+            <h4 th:text="#{news}">News</h4>
+        </div>
+        <div id="menu-box-news-items">
+            <ul id="news-ul">
+                <li><a href="/" th:text="#{news}">News</a></li>
+                <li><a href="/people" th:text="#{users.list}">Users List</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div id="content">
     <p th:text="${person.getUsername()}">VALUE</p>
-    <p th:text="${person.getId()}">VALUE</p>
-
-    <a th:href="@{/people/{id}/edit(id=${person.getId()})}">Edit</a>
-
+    <p th:text="${person.getEmail()}">VALUE</p>
+    <a th:href="@{/people/{id}/edit(id=${person.getId()})}" th:text="#{edit.big}">Edit</a>
     <form th:method="DELETE" th:action="@{/people/{id}(id=${person.getId()})}">
-        <input type="submit" value="Delete"/>
+        <input type="submit" th:value="#{delete.button}"/>
     </form>
+</div>
 </body>
 </html>

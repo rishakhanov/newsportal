@@ -8,16 +8,16 @@
 </head>
 <body>
 <div id="header">
-    <h2>News</h2>
+    <h2 th:text="#{news}">News</h2>
     <div class="topnav">
-        <a sec:authorize="isAnonymous()" href="/login">Login</a>
-        <a sec:authorize="isAuthenticated()" href="/logout">Logout</a>
-        <a sec:authorize="isAnonymous()" href="#about">Register</a>
-        <a href="#contact">Russian</a>
-        <a href="#contact">English</a>
+        <a sec:authorize="isAnonymous()" href="/login" th:text="#{login}">Login</a>
+        <a sec:authorize="isAuthenticated()" href="/logout" th:text="#{logout}">Logout</a>
+        <a sec:authorize="isAnonymous()" href="/people/new" th:text="#{register}">Register</a>
+        <a href="/?lang=ru" th:text="#{rus}">Russian</a>
+        <a href="/?lang=en" th:text="#{eng}">English</a>
         <div class="search-container">
-            <form action="">
-                <input type="text" placeholder="Search.." name="search">
+            <form th:action="@{/news/search}" th:method="POST">
+                <input type="text" name="item" th:placeholder="#{search}">
                 <button type="submit"><i class="fa fa-search"></i></button>
             </form>
         </div>
@@ -26,19 +26,19 @@
 <div id="menu">
     <div id="menu-box">
         <div id="menu-box-news">
-            News
+            <h4 th:text="#{news}">News</h4>
         </div>
         <div id="menu-box-news-items">
             <ul>
-                <li><a href="/">News</a></li>
-                <li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_AUTHOR')"><a href="/news/management">News Management</a></li>
-                <li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/people">User Management</a></li>
+                <li><a href="/" th:text="#{news}">News</a></li>
+                <li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_AUTHOR')"><a href="/news/management" th:text="#{news.management}">News Management</a></li>
+                <li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/people" th:text="#{user.management}">User Management</a></li>
             </ul>
         </div>
     </div>
 </div>
 <div id="content">
-    News
+    <a href="/" th:text="#{news}">News</a>
     <br/>
     <br/>
     <table>
@@ -49,7 +49,7 @@
             </tr>
             <tr>
                 <td th:text="${item.content}"></td>
-                <td class="td-view"><a th:href="@{/news/{id}(id=${item.getId()})}" class="a-view">view</a></td>
+                <td class="td-view"><a th:href="@{/news/{id}(id=${item.getId()})}" class="a-view" th:text="#{view}">view</a></td>
             </tr>
             <tr>
                 <td><br/></td>

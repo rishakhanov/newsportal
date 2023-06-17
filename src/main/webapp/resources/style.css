@@ -38,6 +38,10 @@ h2{
     float: right;
 }
 
+h4 {
+    margin: 0px;
+}
+
 #menu-box-news-items {
     background-color: white;
     color: blue;

@@ -70,6 +70,7 @@ public class Comment {
     public String toString() {
         return "Comment{" +
                 "id=" + id +
+                ", person='" + person.getId() + '\'' +
                 ", body='" + body + '\'' +
                 ", createdDate=" + createdDate +
                 '}';
