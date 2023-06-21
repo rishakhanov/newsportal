@@ -128,6 +128,15 @@ text-align: justify;
     height: 200px;
 }
 
-#edit-textarea {
+.content-likes {
+    display: flex;
+    flex-direction: row;
+}
 
+#likes-size-counter {
+    margin-right: 10px;
+}
+
+#like-png {
+    margin-right: 5px;
 }

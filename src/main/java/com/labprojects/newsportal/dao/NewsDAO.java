@@ -1,6 +1,7 @@
 package com.labprojects.newsportal.dao;
 
 import com.labprojects.newsportal.entity.Comment;
+import com.labprojects.newsportal.entity.Like;
 import com.labprojects.newsportal.entity.News;
 
 import java.util.List;
@@ -24,4 +25,8 @@ public interface NewsDAO {
     public void saveComment(Comment comment);
 
     public News getNews(String searchItem);
+
+    public List<Like> getLikes(Long id);
+
+    public void saveLike(Like like);
 }

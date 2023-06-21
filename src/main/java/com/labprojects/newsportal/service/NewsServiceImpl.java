@@ -4,6 +4,7 @@ import com.labprojects.newsportal.dao.NewsDAOImpl;
 import com.labprojects.newsportal.dao.PersonDAOImpl;
 import com.labprojects.newsportal.dto.CommentDTO;
 import com.labprojects.newsportal.entity.Comment;
+import com.labprojects.newsportal.entity.Like;
 import com.labprojects.newsportal.entity.News;
 import com.labprojects.newsportal.entity.Person;
 import com.labprojects.newsportal.util.CommentMapper;
@@ -13,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
@@ -90,5 +90,27 @@ public class NewsServiceImpl implements NewsService {
         return newsDAO.getNews(searchItem);
     }
 
+    @Override
+    public List<Like> getLikes(Long newsId) {
+        return newsDAO.getLikes(newsId);
+    }
 
+    @Override
+    public boolean personLiked(Long newsId, Long personId) {
+        List<Like> likes = getLikes(newsId);
+        if (likes != null) {
+            for (Like like : likes) {
+                if (like.getPerson().getId().equals(personId)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
+    @Transactional
+    public void saveLike(Like like) {
+        newsDAO.saveLike(like);
+    }
 }

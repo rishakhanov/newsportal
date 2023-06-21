@@ -44,4 +44,13 @@ public class Like {
     public void setPerson(Person person) {
         this.person = person;
     }
+
+    @Override
+    public String toString() {
+        return "Like{" +
+                "id=" + id +
+                ", news=" + news.getTitle() +
+                ", person=" + person.getUsername() +
+                '}';
+    }
 }

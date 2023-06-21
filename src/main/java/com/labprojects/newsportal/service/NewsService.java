@@ -2,6 +2,7 @@ package com.labprojects.newsportal.service;
 
 import com.labprojects.newsportal.dto.CommentDTO;
 import com.labprojects.newsportal.entity.Comment;
+import com.labprojects.newsportal.entity.Like;
 import com.labprojects.newsportal.entity.News;
 
 import java.util.List;
@@ -27,4 +28,10 @@ public interface NewsService {
     public void saveComment(Comment comment);
 
     public News getNews(String searchItem);
+
+    List<Like> getLikes(Long newsId);
+
+    public boolean personLiked(Long newsId, Long personId);
+
+    public void saveLike(Like like);
 }

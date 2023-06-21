@@ -5,7 +5,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import javax.persistence.Query;
 import java.util.List;
 import java.util.Optional;
@@ -73,7 +72,6 @@ public class PersonDAOImpl implements PersonDAO {
         Person personToBeBannedOrPermitted = session.get(Person.class, id);
         Boolean status = personToBeBannedOrPermitted.isEnabled();
         personToBeBannedOrPermitted.setEnabled(!status);
-        System.out.println(personToBeBannedOrPermitted);
     }
 
 

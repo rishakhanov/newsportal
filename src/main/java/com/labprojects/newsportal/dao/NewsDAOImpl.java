@@ -1,14 +1,12 @@
 package com.labprojects.newsportal.dao;
 
 import com.labprojects.newsportal.entity.Comment;
+import com.labprojects.newsportal.entity.Like;
 import com.labprojects.newsportal.entity.News;
-import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
-
 import javax.persistence.Query;
 import java.util.List;
 
@@ -45,7 +43,6 @@ public class NewsDAOImpl implements NewsDAO {
         } catch (Exception ex) {
             return null;
         }
-
     }
 
     @Override
@@ -90,11 +87,30 @@ public class NewsDAOImpl implements NewsDAO {
             String hql = "SELECT news FROM News news WHERE news.title like" + "'%" + searchItem + "%'";
             Query query = session.createQuery(hql, News.class);
             News news = (News) query.getSingleResult();
-            System.out.println(news.getTitle());
             return news;
         } catch (Exception ex) {
             return null;
         }
     }
+
+    @Override
+    public List<Like> getLikes(Long id) {
+        try {
+            Session session = sessionFactory.getCurrentSession();
+            String hql = "SELECT n FROM News n JOIN FETCH n.likes WHERE n.id = " + id;
+            Query query = session.createQuery(hql, News.class);
+            News news = (News) query.getSingleResult();
+            return news.getLikes();
+        } catch (Exception ex) {
+            return null;
+        }
+    }
+
+    @Override
+    public void saveLike(Like like) {
+        Session session = sessionFactory.getCurrentSession();
+        session.save(like);
+    }
+
 
 }

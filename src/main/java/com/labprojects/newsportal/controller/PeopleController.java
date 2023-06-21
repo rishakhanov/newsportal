@@ -34,17 +34,14 @@ public class PeopleController {
     public String getPeople(Model model) {
         List<Person> allPersons = personService.getPersons();
         model.addAttribute("allPersons", allPersons);
-        //return "people/all-persons";
         return "people/user-management";
     }
 
     //@PostMapping("/status")
     @RequestMapping(value = "/people/status", method = RequestMethod.POST)
     public String updateStatus(Model model) {
-        System.out.println(model);
         return "redirect:/people";
     }
-
 
     //@GetMapping("/{id}")
     @RequestMapping(value = "/people/{id}", method = RequestMethod.GET)
@@ -65,7 +62,6 @@ public class PeopleController {
                                BindingResult bindingResult) {
 
         Person person = personMapper.mapToPersonEntity(personDTO);
-
         personValidator.validate(person, bindingResult);
 
         if (bindingResult.hasErrors()) {
@@ -90,7 +86,6 @@ public class PeopleController {
     public String updatePerson(@ModelAttribute("person") @Valid PersonDTO personDTO, BindingResult bindingResult,
                                @PathVariable("id") Long id) {
         Person person = personService.getPerson(id);
-
         person.setUsername(personDTO.getUsername());
         person.setPassword(personDTO.getPassword());
         person.setEmail(personDTO.getEmail());

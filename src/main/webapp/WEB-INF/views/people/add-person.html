@@ -16,8 +16,8 @@
         <a href="/people/new?lang=ru" th:text="#{rus}">Russian</a>
         <a href="/people/new?lang=en" th:text="#{eng}">English</a>
         <div class="search-container">
-            <form action="">
-                <input type="text" name="search" th:placeholder="#{search}">
+            <form th:action="@{/news/search}" th:method="POST">
+                <input type="text" name="item" th:placeholder="#{search}">
                 <button type="submit"><i class="fa fa-search"></i></button>
             </form>
         </div>

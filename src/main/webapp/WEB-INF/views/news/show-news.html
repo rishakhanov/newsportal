@@ -16,8 +16,8 @@
         <a th:href="@{/news/{id}(id=${news.getId()}, lang=ru)}" th:text="#{rus}">Russian</a>
         <a th:href="@{/news/{id}(id=${news.getId()}, lang=en)}" th:text="#{eng}">English</a>
         <div class="search-container">
-            <form action="">
-                <input type="text" name="search" th:placeholder="#{search}">
+            <form th:action="@{/news/search}" th:method="POST">
+                <input type="text" name="item" th:placeholder="#{search}">
                 <button type="submit"><i class="fa fa-search"></i></button>
             </form>
         </div>
@@ -42,6 +42,13 @@
     <br/>
     <p th:text="${news.getTitle()}">VALUE</p>
     <p th:text="${news.getContent()}">VALUE</p>
+    <div class="content-likes">
+        <img th:src="@{/resources/like.png}" id="like-png"/>
+        <a th:text="${likesSize}" id="likes-size-counter">VALUE</a>
+        <form th:method="POST" th:action="@{/news/likes/{id}(id=${news.getId()})}">
+            <input type="submit" th:value="Like"/>
+        </form>
+    </div>
 </div>
 </body>
 </html>

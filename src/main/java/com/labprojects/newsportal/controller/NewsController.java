@@ -2,20 +2,15 @@ package com.labprojects.newsportal.controller;
 
 import com.labprojects.newsportal.dto.CommentDTO;
 import com.labprojects.newsportal.entity.Comment;
+import com.labprojects.newsportal.entity.Like;
 import com.labprojects.newsportal.entity.News;
 import com.labprojects.newsportal.entity.Person;
 import com.labprojects.newsportal.service.NewsService;
 import com.labprojects.newsportal.service.PersonService;
-import org.hibernate.type.LocalDateType;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
 import java.security.Principal;
 import java.time.LocalDate;
 import java.util.List;
@@ -42,13 +37,18 @@ public class NewsController {
 
     @GetMapping("/news/{id}")
     public String getNews(@PathVariable("id") Long id, Model model) {
+        List<Like> likes = newsService.getLikes(id);
+        int likesSize = 0;
+        if (likes != null) {
+            likesSize = likes.size();
+        }
         model.addAttribute("news", newsService.getNews(id));
+        model.addAttribute("likesSize", likesSize);
         return "news/show-news";
     }
 
     @GetMapping("/comments/{id}")
     private String getComments(@PathVariable("id") Long id, Model model) {
-        News news = newsService.getNews(id);
         List<Comment> comments = newsService.getComments(id);
         if (comments != null) {
             List<CommentDTO> commentsDTO = newsService.getCommentsDTO(comments);
@@ -94,7 +94,6 @@ public class NewsController {
         newsService.deleteNews(id);
         return "redirect:/news/management";
     }
-
 
     @GetMapping("/news/new")
     public String showAddNewsForm(@ModelAttribute("news") News news) {
@@ -151,10 +150,30 @@ public class NewsController {
 
     @PostMapping("/news/search")
     public String searchItem(String item) {
-        System.out.println(item);
         Long id = newsService.getNews(item).getId();
-        System.out.println(id);
-
         return "redirect:/news/"+ id;
+    }
+
+    @PostMapping("/news/likes/{id}")
+    public String addLike(@PathVariable("id") Long id, Principal principal) {
+        Optional<Person> personOptional = null;
+        if (principal != null) {
+            String username = principal.getName();
+            personOptional = personService.getPersonByName(username);
+        }
+        Person person;
+
+        if (personOptional.isPresent()) {
+            person = personOptional.get();
+            Long personId = person.getId();
+            if (!newsService.personLiked(id, personId)) {
+                Like like = new Like();
+                like.setNews(newsService.getNews(id));
+                like.setPerson(person);
+                newsService.saveLike(like);
+            }
+        }
+
+        return "redirect:/news/{id}?param=" + id;
     }
 }
