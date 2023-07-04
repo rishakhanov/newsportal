@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <head>
     <meta charset="UTF-8">
-    <title>Add person</title>
+    <title>Register</title>
 </head>
 <body>
 <div id="header">
@@ -31,15 +31,15 @@
         <div id="menu-box-news-items">
             <ul id="news-ul">
                 <li><a href="/" th:text="#{news}">News</a></li>
-                <li><a href="/people" th:text="#{users.list}">Users List</a></li>
+                <li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/people" th:text="#{users.list}">Users List</a></li>
             </ul>
         </div>
     </div>
 </div>
 <div id="content">
     <br/>
-    <h4 th:text="#{add.person}">Add person</h4>
-    <form th:method="POST" th:action="@{/people}" th:object="${person}">
+    <h4 th:text="#{add.person}">Register new user:</h4>
+    <form th:method="POST" th:action="@{/people/register}" th:object="${person}">
         <label for="username" th:text="#{username}">Username</label>
         <input type="text" th:field="*{username}" id="username"/>
         <div style="color:red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username error</div>
@@ -52,7 +52,8 @@
         <input type="email" th:field="*{email}" id="email"/>
         <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</div>
         <br/>
-        <input type="submit" th:value="#{create}"/>
+        <input type="hidden" id="role" name="role" value="ROLE_USER"/>
+        <input type="submit" th:value="#{register.user}"/>
     </form>
 </div>
 </body>

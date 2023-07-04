@@ -24,7 +24,7 @@ public interface NewsDAO {
 
     public void saveComment(Comment comment);
 
-    public News getNews(String searchItem);
+    public List<News> getNews(String searchItem);
 
     public List<Like> getLikes(Long id);
 

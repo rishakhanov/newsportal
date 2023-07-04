@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+<link href="/resources/style.css" rel="stylesheet" type="text/css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<head>
+    <meta charset="UTF-8">
+    <title>News</title>
+</head>
+<body>
+<div id="header">
+    <h2 th:text="#{news}">News</h2>
+    <div class="topnav">
+        <a sec:authorize="isAnonymous()" href="/login" th:text="#{login}">Login</a>
+        <a sec:authorize="isAuthenticated()" href="/logout" th:text="#{logout}">Logout</a>
+        <a sec:authorize="isAnonymous()" href="/people/new" th:text="#{register}">Register</a>
+        <!--<a th:href="@{/news/search/{keyword}(keyword=${keyword}, lang=ru)}" th:text="#{rus}">Russian</a>
+        <a th:href="@{/news/search/{keyword}(keyword=${keyword}, lang=en)}" th:text="#{eng}">English</a>-->
+        <div class="search-language">
+            <form th:action="@{/news/search(lang=ru)}" th:method="POST">
+                <input type="hidden" name="item" th:value="${keyword}">
+                <button type="submit" class="button-language" th:text="#{rus}">Russian</button>
+            </form>
+        </div>
+        <div class="search-language">
+            <form th:action="@{/news/search(lang=en)}" th:method="POST">
+                <input type="hidden" name="item" th:value="${keyword}">
+                <button type="submit" class="button-language" th:text="#{eng}">English</button>
+            </form>
+        </div>
+        <div class="search-container">
+            <form th:action="@{/news/search}" th:method="POST">
+                <input type="text" name="item" th:placeholder="#{search}">
+                <button type="submit"><i class="fa fa-search"></i></button>
+            </form>
+        </div>
+    </div>
+</div>
+<div id="menu">
+    <div id="menu-box">
+        <div id="menu-box-news">
+            <h4 th:text="#{news}">News</h4>
+        </div>
+        <div id="menu-box-news-items">
+            <ul>
+                <li><a href="/" th:text="#{news}">News</a></li>
+                <li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_AUTHOR')"><a href="/news/management" th:text="#{news.management}">News Management</a></li>
+                <li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/people" th:text="#{user.management}">User Management</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div id="content">
+    <a href="/" th:text="#{news}">News</a>
+    <br/>
+    <a th:text="#{search.results}">Search results:</a>
+    <br/>
+    <br/>
+    <table>
+        <th:block th:each = "item : ${news}">
+            <tr>
+                <td class="td-title" th:text="${item.title}" style="width: 90%"></td>
+                <td th:text="${item.createdDate}" style="width: 10%"></td>
+            </tr>
+            <tr>
+                <td th:text="${item.content}"></td>
+                <td class="td-view"><a th:href="@{/news/{id}(id=${item.getId()})}" class="a-view" th:text="#{view}">view</a></td>
+            </tr>
+            <tr>
+                <td><br/></td>
+                <td><br/></td>
+            </tr>
+        </th:block>
+    </table>
+</div>
+
+</body>
+</html>

@@ -27,7 +27,7 @@ public interface NewsService {
 
     public void saveComment(Comment comment);
 
-    public News getNews(String searchItem);
+    public List<News> getNews(String searchItem);
 
     List<Like> getLikes(Long newsId);
 

@@ -20,6 +20,9 @@ public class PersonDTO {
     @Email(message = "Email should be valid")
     private String email;
 
+    @NotEmpty(message = "Role should not be empty")
+    private String role;
+
     public Long getId() {
         return id;
     }
@@ -52,4 +55,11 @@ public class PersonDTO {
         this.email = email;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 }

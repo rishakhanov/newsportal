@@ -123,10 +123,7 @@ public class Person {
     @Override
     public String toString() {
         return "Person{" +
-                "id=" + id +
-                ", news=" + news +
-                ", comments=" + comments +
-                ", likes=" + likes +
+                "id=" + id + '\'' +
                 ", role='" + role + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +

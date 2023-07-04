@@ -86,7 +86,7 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
-    public News getNews(String searchItem) {
+    public List<News> getNews(String searchItem) {
         return newsDAO.getNews(searchItem);
     }
 

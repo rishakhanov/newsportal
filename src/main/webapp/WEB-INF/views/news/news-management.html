@@ -50,13 +50,22 @@
       </tr>
       <tr>
         <td th:text="${item.content}"></td>
-        <td class="td-view"><a th:href="@{/news/{id}(id=${item.getId()})}" class="a-view" th:text="#{view}">view</a></td>
-        <td class="td-view"><a th:href="@{/news/edit/{id}(id=${item.getId()})}" class="a-view" th:text="#{edit}">edit</a></td>
+        <td class="td-view">
+          <form th:method="GET" th:action="@{/news/{id}(id=${item.getId()})}">
+            <input type="submit" th:value="#{view}"/>
+          </form>
+          <!--<a th:href="@{/news/{id}(id=${item.getId()})}" class="a-view" th:text="#{view}">view</a>-->
+        </td>
+        <td class="td-view">
+          <form th:method="GET" th:action="@{/news/edit/{id}(id=${item.getId()})}">
+            <input type="submit" th:value="#{edit}"/>
+          </form>
+          <!--<a th:href="@{/news/edit/{id}(id=${item.getId()})}" class="a-view" th:text="#{edit}">edit</a>-->
+        </td>
         <td class="td-view">
           <form th:method="POST" th:action="@{/news/{id}(id=${item.getId()})}">
             <input type="submit" th:value="#{delete}"/>
           </form>
-          <!--<a th:method="POST" th:href="@{/news/delete/{id}(id=${item.getId()})}" class="a-view">delete</a>-->
         </td>
       </tr>
       <tr>

@@ -76,10 +76,25 @@ ul{
     padding-right: 10px;
     padding-top: 25px;
     padding-bottom: 0px;
-    font-size: 15px;
     color: blue;
+    text-decoration: none;
+    font-family: Arial;
+    font-size: 13px;
 }
 
+.topnav .search-language {
+    float: right;
+    padding-top: 23px;
+    padding-right: 5px;
+}
+
+.topnav .search-language .button-language{
+    border: none;
+    color: blue;
+    background-color: transparent;
+    font-family: Arial;
+    font-size: 13px;
+}
 
 .topnav .search-container {
     float: left;
@@ -139,4 +154,20 @@ text-align: justify;
 
 #like-png {
     margin-right: 5px;
+}
+
+#password {
+    margin-left: 4px;
+}
+
+#email {
+    margin-left: 30px;
+}
+
+#show-person-delete-button {
+    margin-left: 10px;
+}
+
+#role {
+    margin-left: 40px;
 }

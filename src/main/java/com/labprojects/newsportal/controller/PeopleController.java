@@ -6,6 +6,7 @@ import com.labprojects.newsportal.service.PersonService;
 import com.labprojects.newsportal.util.PersonMapper;
 import com.labprojects.newsportal.util.PersonValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,6 +22,9 @@ public class PeopleController {
     private final PersonService personService;
     private final PersonValidator personValidator;
     private final PersonMapper personMapper;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     public PeopleController(PersonService personService, PersonValidator personValidator, PersonMapper personMapper) {
@@ -57,7 +61,7 @@ public class PeopleController {
     }
 
     //@PostMapping()
-    @RequestMapping(value = "/people", method = RequestMethod.POST)
+    @RequestMapping(value = "/people/register", method = RequestMethod.POST)
     public String createPerson(@ModelAttribute("person") @Valid PersonDTO personDTO,
                                BindingResult bindingResult) {
 
@@ -69,7 +73,7 @@ public class PeopleController {
         }
 
         personService.savePerson(person);
-        return "redirect:/people";
+        return "redirect:/login";
     }
 
     //@GetMapping("/{id}/edit")
@@ -87,29 +91,37 @@ public class PeopleController {
                                @PathVariable("id") Long id) {
         Person person = personService.getPerson(id);
         person.setUsername(personDTO.getUsername());
-        person.setPassword(personDTO.getPassword());
+        person.setPassword(passwordEncoder.encode(personDTO.getPassword()));
         person.setEmail(personDTO.getEmail());
+        person.setRole(personDTO.getRole());
 
         personValidator.validate(person, bindingResult);
 
         if (bindingResult.hasErrors()) {
             return "people/edit";
         }
-
+        //System.out.println(person);
         personService.updatePerson(id, person);
+        //System.out.println(person);
         return "redirect:/people";
     }
 
     //@DeleteMapping(value = "/{id}")
     @RequestMapping(value = "/people/{id}", method = RequestMethod.POST)
     public String deletePerson(@PathVariable("id") Long id) {
-        personService.deletePerson(id);
+        Person person = personService.getPerson(id);
+        if (!person.getUsername().equals("admin")) {
+            personService.deletePerson(id);
+        }
         return "redirect:/people";
     }
 
     @RequestMapping(value = "/people/ban/{id}", method = RequestMethod.POST)
     public String changePersonStatus(@PathVariable("id") Long id) {
-        personService.changePersonStatus(id);
+        Person person = personService.getPerson(id);
+        if (!person.getUsername().equals("admin")) {
+            personService.changePersonStatus(id);
+        }
         return "redirect:/people";
     }
 

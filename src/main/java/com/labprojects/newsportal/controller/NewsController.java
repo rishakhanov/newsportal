@@ -53,8 +53,8 @@ public class NewsController {
         if (comments != null) {
             List<CommentDTO> commentsDTO = newsService.getCommentsDTO(comments);
             model.addAttribute("comments", commentsDTO);
-            model.addAttribute("newsId", id);
         }
+        model.addAttribute("newsId", id);
         model.addAttribute("news", newsService.getNews(id));
         return "comments/comments";
     }
@@ -64,7 +64,6 @@ public class NewsController {
         newsService.deleteComment(commentId);
         return "redirect:/comments/{id}?param=" + id;
     }
-
 
     @GetMapping("/news/management")
     public String getNewsManagement(Model model) {
@@ -149,11 +148,34 @@ public class NewsController {
     }
 
     @PostMapping("/news/search")
-    public String searchItem(String item) {
-        Long id = newsService.getNews(item).getId();
-        return "redirect:/news/"+ id;
+    public String searchNews(String item, Model model) {
+        List<News> newsList = null;
+        if (item != null) {
+            newsList = newsService.getNews(item);
+        }
+        if (newsList != null) {
+            model.addAttribute("news", newsList);
+            model.addAttribute("keyword", item);
+            return "news/search";
+        }
+        return "redirect:/";
     }
+/*
+    @GetMapping("/news/search/{keyword}")
+    public String searchNewsByKeyword(@PathVariable("keyword") String keyword, Model model) {
+        List<News> newsList = null;
+        if (keyword != null) {
+            newsList = newsService.getNews(keyword);
+        }
+        if (newsList != null) {
+            model.addAttribute("news", newsList);
+            model.addAttribute("keyword", keyword);
+            return "news/search";
+        }
+        return "redirect:/";
 
+    }
+*/
     @PostMapping("/news/likes/{id}")
     public String addLike(@PathVariable("id") Long id, Principal principal) {
         Optional<Person> personOptional = null;

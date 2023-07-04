@@ -35,6 +35,8 @@ public class PersonDAOImpl implements PersonDAO {
         Person personToBeUpdated = session.get(Person.class, id);
         personToBeUpdated.setUsername(person.getUsername());
         personToBeUpdated.setEmail(person.getEmail());
+        personToBeUpdated.setRole(person.getRole());
+        personToBeUpdated.setPassword(person.getPassword());
     }
 
     @Override

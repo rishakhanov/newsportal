@@ -37,12 +37,24 @@
     </div>
 </div>
 <div id="content">
-    <p th:text="${person.getUsername()}">VALUE</p>
-    <p th:text="${person.getEmail()}">VALUE</p>
-    <a th:href="@{/people/{id}/edit(id=${person.getId()})}" th:text="#{edit.big}">Edit</a>
-    <form th:method="DELETE" th:action="@{/people/{id}(id=${person.getId()})}">
+    <!--<label for="username" th:text="#{username}">Username</label>
+    <p th:text="${person.getUsername()}" id="username">VALUE</p>-->
+    </br>
+    <a th:text="#{username}"></a>: <a th:text="${person.getUsername()}"></a>
+    </br>
+    <a th:text="#{user.role}"></a> <a th:text="${person.getRole()}"></a>
+    </br>
+    email: <a th:text="${person.getEmail()}">VALUE</a>
+    </br>
+    </br>
+    <div class="content-likes">
+    <form th:method="GET" th:action="@{/people/{id}/edit(id=${person.getId()})}">
+        <input type="submit" th:value="#{edit.big}"/>
+    </form>
+    <form th:method="POST" th:action="@{/people/{id}(id=${person.getId()})}" id="show-person-delete-button">
         <input type="submit" th:value="#{delete.button}"/>
     </form>
+    </div>
 </div>
 </body>
 </html>

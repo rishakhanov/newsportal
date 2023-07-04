@@ -28,9 +28,15 @@ public class PersonValidator implements Validator {
         Person person = (Person) target;
         Optional<Person> personOptional = personService.getPerson(person.getEmail());
 
+        if ((personOptional.isPresent() && (personOptional.get().getUsername().equals(person.getUsername())))
+                &&(!personOptional.get().getId().equals(person.getId()))) {
+            errors.rejectValue("username", "", "This username is already taken");
+        }
+
         if ((personOptional.isPresent() && (personOptional.get().getEmail().equals(person.getEmail())))
                 &&(!personOptional.get().getId().equals(person.getId()))) {
             errors.rejectValue("email", "", "This email is already taken");
         }
+
     }
 }

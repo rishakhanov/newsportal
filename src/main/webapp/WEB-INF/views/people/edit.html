@@ -48,9 +48,17 @@
         <input type="password" th:field="*{password}" id="password"/>
         <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password error</div>
         <br/>
-        <label for="email"/>email<label/>
+        <label for="email">email</label>
         <input type="text" th:field="*{email}" id="email"/>
         <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</div>
+        <br/>
+        <label for="role">role</label>
+        <select th:field="*{role}" id="role">
+            <option th:value="ROLE_USER" th:text="User"></option>
+            <option th:value="ROLE_MODERATOR" th:text="Moderator"></option>
+            <option th:value="ROLE_AUTHOR" th:text="Author"></option>
+            <option th:value="ROLE_ADMIN" th:text="Admin"></option>
+        </select>
         <br/>
         <input type="submit" th:value="#{update}"/>
     </form>

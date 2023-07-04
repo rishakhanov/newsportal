@@ -81,13 +81,15 @@ public class NewsDAOImpl implements NewsDAO {
     }
 
     @Override
-    public News getNews(String searchItem) {
+    public List<News> getNews(String searchItem) {
         try {
             Session session = sessionFactory.getCurrentSession();
             String hql = "SELECT news FROM News news WHERE news.title like" + "'%" + searchItem + "%'";
             Query query = session.createQuery(hql, News.class);
-            News news = (News) query.getSingleResult();
-            return news;
+            List<News> newsList = query.getResultList();
+            //News news = (News) query.getSingleResult();
+            //System.out.println("dao:" + news);
+            return newsList;
         } catch (Exception ex) {
             return null;
         }

@@ -42,7 +42,7 @@
     <br/>
     <p th:text="${news. getTitle()}">VALUE</p>
     <p th:text="${news.getContent()}">VALUE</p>
-    <form th:method="GET" th:action="@{/comments/new/{id}(id=${newsId})}">
+    <form sec:authorize="isAuthenticated()" th:method="GET" th:action="@{/comments/new/{id}(id=${newsId})}">
         <input type="submit" th:value="#{add.comment}"/>
     </form>
     <br/>
@@ -55,7 +55,7 @@
             <tr>
                 <td th:text="${item.body}"></td>
                 <td class="td-view">
-                    <form th:method="POST" th:action="@{/news/{id}/comments/{commentId}(id=${newsId},commentId=${item.getId()})}">
+                    <form sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_MODERATOR')" th:method="POST" th:action="@{/news/{id}/comments/{commentId}(id=${newsId},commentId=${item.getId()})}">
                         <input type="submit" th:value="#{delete.button}"/>
                     </form>
                 </td>
@@ -67,6 +67,5 @@
         </th:block>
     </table>
 </div>
-
 </body>
 </html>
