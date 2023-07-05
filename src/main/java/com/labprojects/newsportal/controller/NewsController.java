@@ -160,22 +160,7 @@ public class NewsController {
         }
         return "redirect:/";
     }
-/*
-    @GetMapping("/news/search/{keyword}")
-    public String searchNewsByKeyword(@PathVariable("keyword") String keyword, Model model) {
-        List<News> newsList = null;
-        if (keyword != null) {
-            newsList = newsService.getNews(keyword);
-        }
-        if (newsList != null) {
-            model.addAttribute("news", newsList);
-            model.addAttribute("keyword", keyword);
-            return "news/search";
-        }
-        return "redirect:/";
 
-    }
-*/
     @PostMapping("/news/likes/{id}")
     public String addLike(@PathVariable("id") Long id, Principal principal) {
         Optional<Person> personOptional = null;

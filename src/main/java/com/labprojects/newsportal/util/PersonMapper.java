@@ -18,8 +18,6 @@ public class PersonMapper {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    private final static Long ROLE_USER_ID = 4L;
-
     public Person mapToPersonEntity(PersonDTO personDTO) {
 
         Person person = new Person();
@@ -28,7 +26,6 @@ public class PersonMapper {
         List<Comment> comments = new ArrayList<>();
         List<Like> likes = new ArrayList<>();
 
-        //person.setRole("ROLE_USER");
         person.setRole(personDTO.getRole());
         person.setNews(news);
         person.setComments(comments);

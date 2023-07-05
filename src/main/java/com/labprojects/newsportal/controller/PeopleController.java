@@ -100,9 +100,7 @@ public class PeopleController {
         if (bindingResult.hasErrors()) {
             return "people/edit";
         }
-        //System.out.println(person);
         personService.updatePerson(id, person);
-        //System.out.println(person);
         return "redirect:/people";
     }
 
