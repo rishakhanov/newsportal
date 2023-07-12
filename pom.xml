@@ -121,45 +121,48 @@
       <version>5.8.2</version>
     </dependency>
 
-
-
-
-
-
-   <!--  https://mvnrepository.com/artifact/org.hibernate.validator/hibernate-validator
+    <!-- https://mvnrepository.com/artifact/org.flywaydb/flyway-core -->
     <dependency>
-      <groupId>org.hibernate</groupId>
-      <artifactId>hibernate-validator</artifactId>
-      <version>5.4.2.Final</version>
+      <groupId>org.flywaydb</groupId>
+      <artifactId>flyway-core</artifactId>
+      <version>9.20.0</version>
     </dependency>
 
-     https://mvnrepository.com/artifact/javax.servlet.jsp.jstl/javax.servlet.jsp.jstl-api
-    <dependency>
-      <groupId>javax.servlet.jsp.jstl</groupId>
-      <artifactId>javax.servlet.jsp.jstl-api</artifactId>
-      <version>1.2.2</version>
-    </dependency>
 
-     https://mvnrepository.com/artifact/taglibs/standard
-    <dependency>
-      <groupId>taglibs</groupId>
-      <artifactId>standard</artifactId>
-      <version>1.1.2</version>
-    </dependency>
+    <!--  https://mvnrepository.com/artifact/org.hibernate.validator/hibernate-validator
+     <dependency>
+       <groupId>org.hibernate</groupId>
+       <artifactId>hibernate-validator</artifactId>
+       <version>5.4.2.Final</version>
+     </dependency>
 
-     https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api
-    <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>javax.servlet-api</artifactId>
-      <version>3.1.0</version>
-    </dependency>
-     https://mvnrepository.com/artifact/javax.servlet.jsp/javax.servlet.jsp-api
-    <dependency>
-      <groupId>javax.servlet.jsp</groupId>
-      <artifactId>javax.servlet.jsp-api</artifactId>
-      <version>2.3.1</version>
-      <scope>provided</scope>
-    </dependency> -->
+      https://mvnrepository.com/artifact/javax.servlet.jsp.jstl/javax.servlet.jsp.jstl-api
+     <dependency>
+       <groupId>javax.servlet.jsp.jstl</groupId>
+       <artifactId>javax.servlet.jsp.jstl-api</artifactId>
+       <version>1.2.2</version>
+     </dependency>
+
+      https://mvnrepository.com/artifact/taglibs/standard
+     <dependency>
+       <groupId>taglibs</groupId>
+       <artifactId>standard</artifactId>
+       <version>1.1.2</version>
+     </dependency>
+
+      https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api
+     <dependency>
+       <groupId>javax.servlet</groupId>
+       <artifactId>javax.servlet-api</artifactId>
+       <version>3.1.0</version>
+     </dependency>
+      https://mvnrepository.com/artifact/javax.servlet.jsp/javax.servlet.jsp-api
+     <dependency>
+       <groupId>javax.servlet.jsp</groupId>
+       <artifactId>javax.servlet.jsp-api</artifactId>
+       <version>2.3.1</version>
+       <scope>provided</scope>
+     </dependency> -->
 
 
     <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-war-plugin -->
@@ -172,6 +175,19 @@
         <artifactId>maven-war-plugin</artifactId>
         <version>3.3.2</version>
       </plugin>
+      <!--<plugin>
+        <groupId>org.flywaydb</groupId>
+        <artifactId>flyway-maven-plugin</artifactId>
+        <version>9.20.0</version>
+        <configuration>
+          <driver>org.postgresql.Driver</driver>
+          <url>jdbc:postgresql://localhost:5432/newsportal</url>
+          <user>postgres</user>
+          <password>postgres</password>
+        </configuration>
+      </plugin>-->
     </plugins>
   </build>
+
+
 </project>
