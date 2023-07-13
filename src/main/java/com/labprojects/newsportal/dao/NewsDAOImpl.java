@@ -7,7 +7,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import javax.persistence.Query;
+
+import javax.persistence.*;
 import java.util.List;
 
 @Repository
@@ -18,16 +19,25 @@ public class NewsDAOImpl implements NewsDAO {
 
     @Override
     public List<News> getNews() {
-        Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("from News ", News.class);
-        List<News> news = query.getResultList();
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("NewsDB");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        Query query = entityManager.createQuery("SELECT n FROM News n");
+        List<News> news = (List<News>) query.getResultList();
+
+        //Session session = sessionFactory.getCurrentSession();
+        //Query query = session.createQuery("from News ", News.class);
+        //List<News> news = query.getResultList();
         return news;
     }
+
 
     @Override
     public News getNews(Long id) {
         Session session = sessionFactory.getCurrentSession();
-        return session.get(News.class, id);
+        //return session.get(News.class, id);
+        TypedQuery query = session.getNamedQuery("News_findByNewsId");
+        query.setParameter("id", id);
+        return (News) query.getSingleResult();
     }
 
     @Override

@@ -4,6 +4,9 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
+@NamedQuery(
+        name = "News_findByNewsId",
+        query = "from News n where n.id = :id")
 @Entity
 @Table(name = "news")
 public class News {
