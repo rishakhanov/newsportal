@@ -94,7 +94,7 @@ public class NewsDAOImpl implements NewsDAO {
     public List<News> getNews(String searchItem) {
         try {
             Session session = sessionFactory.getCurrentSession();
-            String hql = "SELECT news FROM News news WHERE news.title like" + "'%" + searchItem + "%'";
+            String hql = "SELECT news FROM News news WHERE lower(news.title) like lower('%" + searchItem + "%')";
             Query query = session.createQuery(hql, News.class);
             List<News> newsList = query.getResultList();
             return newsList;

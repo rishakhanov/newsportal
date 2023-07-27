@@ -136,6 +136,15 @@
       <version>2.2</version>
     </dependency>
 
+    <!-- https://mvnrepository.com/artifact/org.springframework/spring-test -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-test</artifactId>
+      <version>5.3.25</version>
+      <scope>test</scope>
+    </dependency>
+
+
 
 
     <!--  https://mvnrepository.com/artifact/org.hibernate.validator/hibernate-validator
